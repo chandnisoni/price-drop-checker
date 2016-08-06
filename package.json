@@ -10,8 +10,10 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "babyparse": "^0.4.6",
     "ejs": "2.4.1",
     "express": "4.13.3",
+    "multer": "^1.2.0",
     "opbeat": "^3.14.0"
   },
   "repository": {

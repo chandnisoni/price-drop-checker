@@ -1,0 +1,12 @@
+<div>Merchant: <%= merchant %></div>
+<div>Product URL: <%= productUrl %> </div>
+<iframe src="<%= productUrl %>" height="400" width="600"> </iframe>
+<div>Product ID: <%= productId %> </div>
+<div>Product Name: <%= productName %> </div>
+<div>
+  <span>Last Price: <%= lastPrice %></span>
+  <span>Current Price: <%= currentPrice %></span>
+  <span>Price Drop: <%= priceDrop %></span>
+</div>
+<a href="/browser?page=<%= prevPage %>&csv=<%= filename%>">Prev</a>
+<a href="/browser?page=<%= nextPage %>&csv=<%= filename%>">Next</a>
