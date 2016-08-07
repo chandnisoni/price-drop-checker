@@ -2,7 +2,8 @@ var opbeat = require('opbeat').start()
 
 var express = require('express');
 var multer  = require('multer');
-var baby = require('babyparse');
+// var baby = require('babyparse');
+var parse = require('csv-parse');
 var upload = multer({ dest: 'uploads/' });
 fs = require('fs');
 
@@ -34,26 +35,30 @@ app.get('/browser', function(req, res){
     if (err) {
       return console.log(err);
     }
-    var parsed = baby.parse(data);
-    var lines = parsed.data;
 
-    if(page < 1){
-      page = 1;
-    } else if (page >= lines.length) {
-      page = page - 1;
-    }
-    console.log(lines[page]);
-    res.render('pages/browser', {
-      productName:lines[page][2],
-      merchant: lines[page][0],
-      productUrl:lines[page][3],
-      productId: lines[page][1],
-      lastPrice: lines[page][4],
-      currentPrice: lines[page][5],
-      priceDrop: lines[page][6],
-      prevPage: page - 1,
-      nextPage: page + 1,
-      filename: filename
+    parse(data, {relax: true, skip_empty_lines: true}, function(err, lines){
+      console.log(lines);
+      if(page < 1){
+        page = 1;
+      } else if (page >= lines.length) {
+        page = lines.length - 1;
+      }
+      console.log(lines[page]);
+      var lastPrice = "$" + (parseInt(lines[page][4]) / 100);
+      var currPrice = "$" + (parseInt(lines[page][5]) / 100);
+      var priceDrop = "$" + (parseFloat(lines[page][6]));
+      res.render('pages/browser', {
+        productName: lines[page][2],
+        merchant: lines[page][0],
+        productUrl:lines[page][3],
+        productId: lines[page][1],
+        lastPrice: lastPrice,
+        currentPrice: currPrice,
+        priceDrop: priceDrop,
+        prevPage: page - 1,
+        nextPage: page + 1,
+        filename: filename
+      });
     });
   });
 });

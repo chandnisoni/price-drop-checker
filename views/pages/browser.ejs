@@ -1,12 +1,43 @@
-<div>Merchant: <%= merchant %></div>
-<div>Product URL: <%= productUrl %> </div>
-<iframe src="<%= productUrl %>" height="400" width="600"> </iframe>
-<div>Product ID: <%= productId %> </div>
-<div>Product Name: <%= productName %> </div>
+<% include header.ejs %>
 <div>
-  <span>Last Price: <%= lastPrice %></span>
-  <span>Current Price: <%= currentPrice %></span>
-  <span>Price Drop: <%= priceDrop %></span>
+  <div id="frame">
+    <iframe src="<%= productUrl %>" align="right"></iframe>
+  </div>
+  <div id="description" class="table-responsive">
+    <table class="table table-striped table-hover">
+      <tr>
+        <td>Merchant:</td>
+        <td><%= merchant %></td>
+      </tr>
+      <tr>
+        <td>Product ID: </td>
+        <td><%= productId %></td>
+      </tr>
+      <tr>
+        <td>Product Name: </td>
+        <td><%= productName %></td>
+      </tr>
+      <tr>
+        <td>Product URL</td>
+        <td><a href="<%= productUrl %>">Click here</a></td>
+      </tr>
+      <tr>
+        <td>Last Price: </td>
+        <td><%= lastPrice %></td>
+      </tr>
+      <tr>
+        <td>Current Price: </td>
+        <td><%= currentPrice %></td>
+      </tr>
+      <tr>
+        <td>Price drop: </td>
+        <td><%= priceDrop %></td>
+      </tr>
+    </table>
+    <a id="prev" class="btn btn-primary" href="/browser?page=<%= prevPage %>&csv=<%= filename %>">Prev</a>
+    <a id="next" class="btn btn-primary" href="/browser?page=<%= nextPage %>&csv=<%= filename %>">Next</a>
+
+    <p class="x-frame-warning text-warning">* The product websites using "X-FRAME-OPTIONS: SAMEORIGIN" will be shown as blank on the right website preview. </p>
+  </div>
 </div>
-<a href="/browser?page=<%= prevPage %>&csv=<%= filename%>">Prev</a>
-<a href="/browser?page=<%= nextPage %>&csv=<%= filename%>">Next</a>
+<% include footer.ejs %>

@@ -1,13 +1,13 @@
-<!doctype html>
-<html>
-<head>
-  <title>Price Drop</title>
-</head>
-<body>
-  <form action="/upload" method="post" enctype="multipart/form-data">
-    <label for="file">Choose a file: </label>
-    <input type="file" name="csv_file">
-    <input type="submit" value="Upload CSV file">
-  </form>
-</body>
-</html>
+<% include header.ejs %>
+  <div class="container">
+    <div class="upload-box">
+      <form action="/upload" method="post" enctype="multipart/form-data">
+        <span id="selected-file"></span>
+        <label class="btn btn-default btn-file">
+          Browse <input name="csv_file" type="file" style="display: none;" />
+        </label>
+        <input type="submit" class="btn btn-success" value="Upload CSV file" />
+      </form>
+    </div>
+  </div>
+<% include footer.ejs %>
