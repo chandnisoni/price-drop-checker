@@ -6,6 +6,8 @@ A web tool that helps validating price drops.
 
 Please view the live running demo here: https://fierce-retreat-18652.herokuapp.com/
 
+Here's a [link to sample CSV](https://raw.githubusercontent.com/chandnisoni/price-drop-checker/master/samples/sample.csv) that can be used with the demo:.
+
 ## Running Locally
 
 Make sure you have [Node.js](http://nodejs.org/) installed.
