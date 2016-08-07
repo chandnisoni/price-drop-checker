@@ -8,7 +8,7 @@ Please view the live running demo here: https://fierce-retreat-18652.herokuapp.c
 
 ## Running Locally
 
-Make sure you have [Node.js](http://nodejs.org/) and the [Heroku Toolbelt](https://toolbelt.heroku.com/) installed.
+Make sure you have [Node.js](http://nodejs.org/) installed.
 
 ```sh
 $ git clone https://github.com/chandnisoni/price-drop-checker.git # or clone your own fork
@@ -21,11 +21,10 @@ Your app should now be running on [localhost:5000](http://localhost:5000/).
 
 ## Deploying to Heroku (Optional)
 
+Make sure you have [Heroku Toolbelt](https://toolbelt.heroku.com/) installed.
+
 ```
 $ heroku create
 $ git push heroku master
 $ heroku open
 ```
-or
-
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
