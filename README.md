@@ -23,8 +23,16 @@ Your app should now be running on [localhost:5000](http://localhost:5000/).
 
 Make sure you have [Heroku Toolbelt](https://toolbelt.heroku.com/) installed.
 
-```
+```sh
 $ heroku create
 $ git push heroku master
 $ heroku open
+```
+
+## CSV File Format
+
+Project expects the CSV files to be in following format:
+
+```
+merchant,product_id,product_name,product_crawler_url,last_price,current_price,price_drop
 ```
