@@ -10,11 +10,13 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "cheerio": "^0.20.0",
     "csv-parse": "^1.1.7",
     "ejs": "2.4.1",
     "express": "4.13.3",
     "multer": "^1.2.0",
-    "opbeat": "^3.14.0"
+    "opbeat": "^3.14.0",
+    "request": "^2.74.0"
   },
   "repository": {
     "type": "git",

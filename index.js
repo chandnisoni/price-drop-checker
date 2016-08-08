@@ -1,8 +1,9 @@
 var opbeat = require('opbeat').start()
-
 var express = require('express');
 var multer  = require('multer');
-// var baby = require('babyparse');
+var cheerio = require("cheerio");
+var request = require("request");
+
 var parse = require('csv-parse');
 var upload = multer({ dest: 'uploads/' });
 fs = require('fs');
@@ -28,39 +29,47 @@ app.post('/upload', upload.single('csv_file'), function (req, res, next) {
 });
 
 app.get('/browser', function(req, res){
-  var filename = req.query.csv;
-  var page = parseInt(req.query.page);
+var filename = req.query.csv;
+var page = parseInt(req.query.page);
 
-  fs.readFile('uploads/' + filename, 'utf8', function (err,data) {
-    if (err) {
-      return console.log(err);
+fs.readFile('uploads/' + filename, 'utf8', function (err,data) {
+
+  if (err) {
+    return console.log(err);
+  }
+
+  parse(data, {relax: true, skip_empty_lines: true}, function(err, lines){
+    if(page < 1){
+      page = 1;
+    } else if (page >= lines.length) {
+      page = lines.length - 1;
     }
+    // console.log(lines[page]);
+    var lastPrice = "$" + (parseInt(lines[page][4]) / 100);
+    var currPrice = "$" + (parseInt(lines[page][5]) / 100);
+    var priceDrop = "$" + (parseFloat(lines[page][6]));
+    var productUrl = lines[page][3];
 
-    parse(data, {relax: true, skip_empty_lines: true}, function(err, lines){
-      console.log(lines);
-      if(page < 1){
-        page = 1;
-      } else if (page >= lines.length) {
-        page = lines.length - 1;
-      }
-      console.log(lines[page]);
-      var lastPrice = "$" + (parseInt(lines[page][4]) / 100);
-      var currPrice = "$" + (parseInt(lines[page][5]) / 100);
-      var priceDrop = "$" + (parseFloat(lines[page][6]));
+    request({
+      uri: productUrl,
+    }, function(error, response, body) {
+       var content = body;
       res.render('pages/browser', {
         productName: lines[page][2],
         merchant: lines[page][0],
-        productUrl:lines[page][3],
+        productUrl: productUrl,
         productId: lines[page][1],
         lastPrice: lastPrice,
         currentPrice: currPrice,
         priceDrop: priceDrop,
         prevPage: page - 1,
         nextPage: page + 1,
-        filename: filename
+        filename: filename,
+        content: content
       });
     });
   });
+});
 });
 
 app.listen(app.get('port'), function() {
