@@ -4,7 +4,7 @@ A web tool that helps validating price drops.
 
 ## Live Demo
 
-Please view the live running demo here: http://price-drop-checker.herokuapp.com//
+Please view the live running demo here: http://price-drop-checker.herokuapp.com/
 
 Here's a [link to sample CSV](https://raw.githubusercontent.com/chandnisoni/price-drop-checker/master/samples/sample.csv) that can be used with the demo:.
 
